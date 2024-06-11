@@ -1,12 +1,13 @@
 
 //Realizando llamado de header
 
-
+import { useReducer } from 'react'
 import Header from './components/header'
 import Guitarra from './components/guitarra'
 
 
 import { useCart } from "./hooks/useCart"
+import { InitialState, cartReducer } from './reducers/cart-reducer'
 
 
   //State, los Hooks tienen que estar en la parte superior y no se puede cambiar su valor
@@ -15,7 +16,12 @@ import { useCart } from "./hooks/useCart"
 
 function App() {
 
-  const { data,cart,addTocart,removeFromCart,incrementarCantidad,descrementarCantidad,clearCart,isEmpty,cartTotal}=useCart()
+  const {cart,removeFromCart,incrementarCantidad,descrementarCantidad,clearCart,isEmpty,cartTotal}=useCart()
+
+  const [state,dispatch]= useReducer(cartReducer,InitialState)
+
+
+  
 
  //En typeScript hay que ser especifico con los datos
   
@@ -40,14 +46,14 @@ function App() {
         <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
-          {data.map((guitarra) => {
+          {state.data.map((guitarra) => {
 
             return(<Guitarra
                 key={guitarra.id}
                 guitarra={guitarra}
           
           
-                addTocart={addTocart}
+                dispatch={dispatch}
             />)
           })}
    
