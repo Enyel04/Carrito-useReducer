@@ -1,7 +1,7 @@
 
 //Realizando llamado de header
 
-import { useReducer } from 'react'
+import { useReducer,useEffect } from 'react'
 import Header from './components/header'
 import Guitarra from './components/guitarra'
 
@@ -19,6 +19,10 @@ function App() {
 
 
   const [state,dispatch]= useReducer(cartReducer,InitialState)
+
+  useEffect(() => {
+      localStorage.setItem("cart",JSON.stringify(state.cart)) //para guardar elementos en el localStorage
+  },[state.cart])
 
 
   

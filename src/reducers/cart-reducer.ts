@@ -16,10 +16,15 @@ export type CartAction=
         cart:CartItem[]
     }
 
+    const carritoInicial=() :CartItem[] => {
+        const localStorageCart=localStorage.getItem("cart")
+        return localStorageCart? JSON.parse(localStorageCart): []
+      }
+
     export const InitialState : CartState={
 
         data: db,
-        cart:[]
+        cart:carritoInicial()
     }
 
     const MAX_ITEMS=5 //maximo de elementos en el carrito
