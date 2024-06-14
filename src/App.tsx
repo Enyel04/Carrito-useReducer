@@ -6,7 +6,7 @@ import Header from './components/header'
 import Guitarra from './components/guitarra'
 
 
-import { useCart } from "./hooks/useCart"
+
 import { InitialState, cartReducer } from './reducers/cart-reducer'
 
 
@@ -16,7 +16,7 @@ import { InitialState, cartReducer } from './reducers/cart-reducer'
 
 function App() {
 
-  const {incrementarCantidad,descrementarCantidad,clearCart}=useCart()
+
 
   const [state,dispatch]= useReducer(cartReducer,InitialState)
 
@@ -32,9 +32,9 @@ function App() {
       <Header
         cart={state.cart}
         dispatch={dispatch}
-        incrementarCantidad={incrementarCantidad}
-        descrementarCantidad={descrementarCantidad}
-        clearCart={clearCart}
+     
+   
+       
    
       />
     
@@ -50,8 +50,7 @@ function App() {
             return(<Guitarra
                 key={guitarra.id}
                 guitarra={guitarra}
-          
-          
+
                 dispatch={dispatch}
             />)
           })}

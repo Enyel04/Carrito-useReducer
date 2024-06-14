@@ -1,4 +1,4 @@
-import type { CartItem,Guitarra } from "../types"
+import type { CartItem } from "../types"
 
 
 import { useMemo,Dispatch } from "react"
@@ -7,16 +7,14 @@ import type{ CartAction } from "../reducers/cart-reducer"
 type HeaderProps={
     cart:CartItem[]
     dispatch: Dispatch<CartAction>
-    incrementarCantidad:(id:Guitarra["id"]) =>void
-    descrementarCantidad:(id:Guitarra["id"]) =>void
-    clearCart: () => void
+  
 
 
 
 
 }
 
-export default function Header({cart,dispatch,incrementarCantidad,descrementarCantidad,clearCart}: HeaderProps) {
+export default function Header({cart,dispatch}: HeaderProps) {
 
 
         //State derivado
@@ -77,7 +75,7 @@ export default function Header({cart,dispatch,incrementarCantidad,descrementarCa
                                                 <button
                                                     type="button"
                                                     className="btn btn-dark"
-                                                    onClick={() =>descrementarCantidad(guitarra.id) }
+                                                    onClick={() =>dispatch({type:'descrementar-cantidad',payload:{item:guitarra.id}}) }
                                                       
                                                    
                                                 >
@@ -87,7 +85,7 @@ export default function Header({cart,dispatch,incrementarCantidad,descrementarCa
                                                 <button
                                                     type="button"
                                                     className="btn btn-dark"
-                                                    onClick={() =>incrementarCantidad(guitarra.id) }
+                                                    onClick={() =>dispatch({type:"incrementar-cantidad",payload:{item:guitarra.id}}) }
                                                 >
                                                     +
                                                 </button>
@@ -96,7 +94,7 @@ export default function Header({cart,dispatch,incrementarCantidad,descrementarCa
                                                 <button
                                                     className="btn btn-danger"
                                                     type="button"
-                                                    onClick={()=>dispatch({type:'remove-from-cart',payload:{id:guitarra.id}})}
+                                                    onClick={()=>dispatch({type:'remove-from-cart',payload:{item:guitarra.id}})}
                                                 >
                                                     X
                                                 </button>
@@ -113,7 +111,7 @@ export default function Header({cart,dispatch,incrementarCantidad,descrementarCa
                             )} {/* Final de Operador Ternario de si carrito esta vacio*/}
                             <button 
                             className="btn btn-dark w-100 mt-3 p-2"
-                            onClick={clearCart}
+                            onClick={()=>dispatch({type:'clear-cart'})}
                             >Vaciar Carrito</button>
                         </div>
                     </div>

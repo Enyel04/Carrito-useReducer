@@ -7,7 +7,7 @@ export type CartAction=
     {type: 'remove-from-cart',payload:{item:Guitarra['id']}} |
     {type: 'descrementar-cantidad',payload:{item:Guitarra['id']}} |
     {type: 'incrementar-cantidad',payload:{item:Guitarra['id']}} |
-    {type: 'clear-cart',payload:{item:Guitarra['id']}} 
+    {type: 'clear-cart'} 
 
 
     export type CartState={
@@ -79,19 +79,48 @@ export type CartAction=
         }
 
         if (action.type==="incrementar-cantidad") {
+
+
+            const cart=state.cart.map(item=>{
+                if (item.id===action.payload.item && item.cantidad < MAX_ITEMS) {
+                  return {
+                    ...item,
+                    cantidad:item.cantidad+1
+                  }
+                }
+                return item
+              })
+   
+          
             return {
-                ...state
+                ...state,
+                cart
             }
         }
         if (action.type=== "descrementar-cantidad") {
+
+            const cart=state.cart.map(item=>{
+                if (item.id===action.payload.item && item.cantidad > MIN_ITEMS) {
+                  return {
+                    ...item,
+                    cantidad:item.cantidad-1
+                  }
+                }
+                return item
+              })
+             
             return {
-                ...state
+                ...state,
+                cart
             }
         }
         if (action.type=== "clear-cart") {
+
+            const cart=state.cart=[]
             
             return {
-                ...state
+                ...state,
+                cart
             }
         }
         return state
