@@ -16,7 +16,7 @@ import { InitialState, cartReducer } from './reducers/cart-reducer'
 
 function App() {
 
-  const {cart,removeFromCart,incrementarCantidad,descrementarCantidad,clearCart,isEmpty,cartTotal}=useCart()
+  const {removeFromCart,incrementarCantidad,descrementarCantidad,clearCart}=useCart()
 
   const [state,dispatch]= useReducer(cartReducer,InitialState)
 
@@ -30,13 +30,12 @@ function App() {
     <>
   
       <Header
-        cart={cart}
+        cart={state.cart}
         removeFromCart={removeFromCart}
         incrementarCantidad={incrementarCantidad}
         descrementarCantidad={descrementarCantidad}
         clearCart={clearCart}
-        isEmpty={isEmpty}
-        cartTotal={cartTotal}
+   
       />
     
       {/* Recuerda que para llamar a un componente tiene que ser en mayuscula*/}

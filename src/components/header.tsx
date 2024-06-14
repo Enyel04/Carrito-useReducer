@@ -1,22 +1,25 @@
 import type { CartItem,Guitarra } from "../types"
 
+import { useMemo } from "react"
+
 type HeaderProps={
     cart:CartItem[]
     removeFromCart:(id:Guitarra["id"]) =>void
     incrementarCantidad:(id:Guitarra["id"]) =>void
     descrementarCantidad:(id:Guitarra["id"]) =>void
     clearCart: () => void
-    isEmpty:boolean
-    cartTotal:number
+
 
 
 
 }
 
-export default function Header({cart,removeFromCart,incrementarCantidad,descrementarCantidad,clearCart,isEmpty,cartTotal}: HeaderProps) {
+export default function Header({cart,removeFromCart,incrementarCantidad,descrementarCantidad,clearCart}: HeaderProps) {
 
 
-
+        //State derivado
+        const isEmpty= useMemo(() => cart.length===0, [cart] ) //Lee si hay elementos en el carrito, de base sera 0
+        const cartTotal=useMemo(() => cart.reduce((total,item)=> total +(item.cantidad*item.price),0),[cart]) //Calculara la cantidad de guitarras (items) en el carrito y los multiplicara por el precio, luego se suma el total
 
 
     return(
