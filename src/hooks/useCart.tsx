@@ -22,10 +22,9 @@ export const useCart=() => {
     
    
     
-    function removeFromCart(id : Guitarra["id"]) {
-    
-      setCart((prevCart) =>prevCart.filter (guitarra=>guitarra.id !==id)) //Agregando setcart para eliminar carrito de compra, pasa id de guitarra para proceder a eliminarlo
-    }
+
+      
+   
     
     function incrementarCantidad(id : Guitarra["id"]) {
     
@@ -64,7 +63,7 @@ export const useCart=() => {
     return{
     
        cart,
-       removeFromCart,
+    
        incrementarCantidad,
        descrementarCantidad,
        clearCart

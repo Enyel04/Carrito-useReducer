@@ -67,9 +67,14 @@ export type CartAction=
             }
         }
         if (action.type==="remove-from-cart") {
+
+
+           
+        const cart=state.cart.filter(item=> item.id!==action.payload.item)
             
             return {
-                ...state
+                ...state,
+                cart
             }
         }
 
